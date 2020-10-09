@@ -21,9 +21,9 @@ function NewUserForm( { addUser = null } ) {
 
         // const success = addUser(formData);
 
-        if (success) {
-            setFormData(INITIAL_STATE);
-        }
+        // if (success) {
+        //     setFormData(INITIAL_STATE);
+        // }
     }
 
 

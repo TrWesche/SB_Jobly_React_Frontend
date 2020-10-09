@@ -9,7 +9,7 @@ function Home() {
                 <CardBody>
                     <CardTitle>
                         <h2>Welcome to Job.ly!</h2>
-                        <p>The web's premire site for hypothenical jobs.</p>
+                        <p>The web's premire site for hypothetical jobs.</p>
                     </CardTitle>
                 </CardBody>
             </Card>

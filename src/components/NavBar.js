@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import SessionContext from "./SessionContext";
-// import "./NavBar.css";
+import {NavLink} from "react-router-dom";
+import "./NavBar.css";
 import { 
     Navbar, 
     Nav, 
     NavItem, 
     NavbarBrand, 
     NavbarToggler,
-    NavLink,
     Collapse,
     UncontrolledDropdown, 
     DropdownToggle, 
@@ -24,8 +24,8 @@ function JoblyNavBar() {
 
 
     const navLoggedIn = (
-        <Collapse>
-            <Nav>
+        <Collapse isOpen={isOpen} navbar>
+            <Nav navbar>
                 <NavItem>
                     <NavLink to="/users">Users</NavLink>
                 </NavItem>
@@ -36,7 +36,7 @@ function JoblyNavBar() {
                     <NavLink to="/jobs">Jobs</NavLink>
                 </NavItem>
             </Nav>
-            <UncontrolledDropdown nav inNavbar className="mr-auto">
+            <UncontrolledDropdown >
                 <DropdownToggle nav caret>
                     My Account
                 </DropdownToggle>
@@ -57,8 +57,8 @@ function JoblyNavBar() {
     )
 
     const navLoggedOut = (
-        <Collapse>
-            <Nav>
+        <Collapse isOpen={isOpen} navbar>
+            <Nav className="mr-auto">
                 <NavItem>
                     <NavLink to="/login">Login</NavLink>
                 </NavItem>
@@ -71,10 +71,10 @@ function JoblyNavBar() {
 
     return (
         <div>
-            <Navbar expand="md">
-                <NavbarBrand href="/">Job.ly</NavbarBrand>
-                <NavbarToggler onClick={toggle} />
-                {loggedIn ? navLoggedIn : navLoggedOut};
+            <Navbar dark expand="md">
+                <NavbarBrand href="/" className="mr-auto">Job.ly</NavbarBrand>
+                <NavbarToggler onClick={toggle} className="mr-2"/>
+                {loggedIn ? navLoggedIn : navLoggedOut}
             </Navbar>
         </div>
     )

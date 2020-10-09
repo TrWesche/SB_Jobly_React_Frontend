@@ -21,9 +21,9 @@ function UserLoginForm( { loginUser = null } ) {
 
         // const success = loginUser(formData);
 
-        if (success) {
-            setFormData(INITIAL_STATE);
-        }
+        // if (success) {
+        //     setFormData(INITIAL_STATE);
+        // }
     }
 
 

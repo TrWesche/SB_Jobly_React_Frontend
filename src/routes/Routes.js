@@ -3,6 +3,12 @@ import { Route, Switch } from "react-router-dom";
 import Home from "../components/Home";
 import NewUserForm from "../components/user/NewUserForm";
 import UserLoginForm from "../components/user/UserLoginForm";
+import UsersOverview from "../components/user/UsersOverview";
+import UserDetail from "../components/user/UserDetail";
+import CompaniesOverview from "../components/companies/CompaniesOverview";
+import CompanyDetail from "../components/companies/CompanyDetail";
+import JobsOverview from "../components/job/JobsOverview";
+import JobDetail from "../components/job/JobDetail";
 
 function Routes() {
 

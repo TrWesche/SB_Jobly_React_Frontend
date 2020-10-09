@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import JoblyNavBar from "./components/NavBar";
 import Routes from "./routes/Routes";
-import SessionContext from "./SessionContext";
+import SessionContext from "./components/SessionContext";
 
 function App() {
   return (
