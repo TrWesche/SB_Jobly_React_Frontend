@@ -5,6 +5,7 @@ import NewUserForm from "../components/user/NewUserForm";
 import UserLoginForm from "../components/user/UserLoginForm";
 import UsersOverview from "../components/user/UsersOverview";
 import UserDetail from "../components/user/UserDetail";
+import UserEditForm from "../components/user/UserEditForm";
 import CompaniesOverview from "../components/companies/CompaniesOverview";
 import CompanyDetail from "../components/companies/CompanyDetail";
 import JobsOverview from "../components/job/JobsOverview";
@@ -25,6 +26,9 @@ function Routes() {
             </Route>
             <Route exact path="/users">
                 <UsersOverview />
+            </Route>
+            <Route path="/users/:username/edit">
+                <UserEditForm />
             </Route>
             <Route path="/users/:username">
                 <UserDetail />
