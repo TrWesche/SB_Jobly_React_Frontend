@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardBody, CardTitle, CardText, ListGroup } from "reactstrap";
 import UserCard from "./subs/UserCard";
-
+import apiJobly from "../../utils/apiJobly";
 
 function UsersOverview() {
     const sampleValue = [
@@ -13,6 +13,35 @@ function UsersOverview() {
         }]
 
     const [userList, setUserList] = useState(sampleValue);
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        async function getUsers() {
+            let res = await apiJobly.getUsers();
+            console.log(res)
+            setUserList(res);
+            setIsReady(true);
+        }
+
+        getUsers();
+    }, [])
+
+
+    const render = () => {
+        if (isReady) {
+            return (
+                <ListGroup>
+                    {userList.map(user => {
+                        return UserCard(user);
+                    })}
+                </ListGroup>
+            )
+        } 
+
+        return (
+            <CardText>Loading...</CardText>
+        )
+    }
     
     return (
         <section>
@@ -21,15 +50,9 @@ function UsersOverview() {
                     <CardTitle>
                         <h2>Users</h2>
                     </CardTitle>
-                    <CardText>
-                        <p>We have some of the greatest people in the world on Job.ly.</p>
-                        <p>TODO: Search Functionality</p>
-                    </CardText>
-                    <ListGroup>
-                        {userList.map(user => {
-                            return UserCard(user);
-                        })}
-                    </ListGroup>
+                    <CardText>We have some of the greatest people in the world on Job.ly.</CardText>
+                    <CardText>TODO: Search Functionality</CardText>
+                    {render()}
                 </CardBody>
                 
             </Card>

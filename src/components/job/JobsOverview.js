@@ -19,8 +19,8 @@ function JobsOverview() {
 
     useEffect(() => {
         async function getJobs(min_salary = null, min_equity = null, search = null) {
-            let jobs = await apiJobly.getJobs();
-            setJobList(jobs);
+            let res = await apiJobly.getJobs();
+            setJobList(res);
             setIsReady(true);
         }
 

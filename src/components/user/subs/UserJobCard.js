@@ -3,14 +3,12 @@ import {ListGroupItem, Card, CardTitle, CardText} from "reactstrap";
 
 function UserJobCard({ id, title, company_handle, state }) {
     return (
-        <ListGroupItem id={id}>
+        <ListGroupItem key={id}>
             <Card>
                 <CardTitle>
                     <h4>{title}</h4>
                 </CardTitle>
-                <CardText>
-                    <p>Equity: {state}</p>
-                </CardText>
+                <CardText>{state ? "Applied" : "Not Applied"}</CardText>
             </Card>
         </ListGroupItem>
     )
