@@ -3,15 +3,13 @@ import {ListGroupItem, Card, CardTitle, CardText} from "reactstrap";
 
 function CompanyJobCard({ id, title, salary, equity }) {
     return (
-        <ListGroupItem id={id}>
+        <ListGroupItem key={id}>
             <Card>
                 <CardTitle>
                     <h4>{title}</h4>
                 </CardTitle>
-                <CardText>
-                    <p>Salary: {salary}</p>
-                    <p>Equity: {equity}</p>
-                </CardText>
+                <CardText>Salary: {salary}</CardText>
+                <CardText>Equity: {equity}</CardText>
             </Card>
         </ListGroupItem>
     )
