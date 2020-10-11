@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg, Button, CardLink } from "reactstrap";
-import UserJobCard from "./subs/UserJobCard";
+import JobCard from "../job/subs/JobCard";
 import apiJobly from "../../utils/apiJobly";
+
 
 function UserDetail() {
     const { username } = useParams();
@@ -18,7 +19,7 @@ function UserDetail() {
     //             id: "J200", 
     //             title: "Test Job", 
     //             company_handle: "MSFT", 
-    //             state: "WA"
+    //             state: false
     //         }
     //         ]
     //     }
@@ -48,7 +49,7 @@ function UserDetail() {
                     <CardText>Email: {userDetails.email}</CardText>
                     <CardLink href={`/users/${userDetails.username}/edit`}>Update</CardLink>
                     <ListGroup>
-                        {userDetails.jobs.map(job => UserJobCard(job))}
+                        {userDetails.jobs.map(job => JobCard(job))}
                     </ListGroup>
                 </CardBody>
                 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg } from "reactstrap";
-import CompanyJobCard from "./subs/CompanyJobCard";
+import JobCard from "../job/subs/JobCard";
 import apiJobly from "../../utils/apiJobly";
 
 function CompanyDetail() {
@@ -53,7 +53,7 @@ function CompanyDetail() {
                     <CardText>{companyDetails.description}</CardText>
                     <CardText>{companyDetails.num_employees}</CardText>
                     <ListGroup>
-                        {companyDetails.jobs.map(job => CompanyJobCard(job))}
+                        {companyDetails.jobs.map(job => JobCard(job))}
                     </ListGroup>
                 </CardBody>
             )
