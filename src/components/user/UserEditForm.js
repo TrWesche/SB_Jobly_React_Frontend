@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import apiJobly from "../../utils/apiJobly";
 
-
-function UserEditForm( { addUser = null } ) {
+function UserEditForm() {
+    const { username } = useParams();
     const INITIAL_STATE = { password: "", first_name: "", last_name: "", photo_url: "", email: "" }
     const [formData, setFormData] = useState(INITIAL_STATE);
+
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        async function getUser() {
+            let res = await apiJobly.getUserDetails(username);
+            setFormData(res);
+            setIsReady(true);
+        }
+
+        getUser();
+    }, [])
+
+    
   
     // Function for controlling form data
     const handleChange = (e) => {
@@ -26,6 +42,47 @@ function UserEditForm( { addUser = null } ) {
         // }
     }
 
+    const render = () => {
+        if (isReady) {
+            return (
+                <Form onSubmit={handleSubmit}>
+                    <FormGroup>
+                        <Label for="username">Username*</Label>
+                        <Input type="text" name="username" username="menu" value={formData.username} disabled />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Password*</Label>
+                        <Input type="password" name="password" id="password" onChange={handleChange} value={formData.password}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="first_name">First Name</Label>
+                        <Input type="text" name="first_name" id="first_name" onChange={handleChange} value={formData.first_name}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="last_name">Last Name</Label>
+                        <Input type="text" name="last_name" id="last_name" onChange={handleChange} value={formData.last_name}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="photo_url">Photo Address</Label>
+                        <Input type="text" name="photo_url" id="photo_url" onChange={handleChange} value={formData.photo_url}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="email">Email</Label>
+                        <Input type="text" name="email" id="email" onChange={handleChange} value={formData.email}/>
+                    </FormGroup>
+
+                    <Button>Submit</Button>
+                </Form>
+            )
+        } 
+
+        return (
+            <CardBody>
+                <CardText>Loading...</CardText>
+            </CardBody>
+        )
+    }
+
 
 
     return (
@@ -35,40 +92,7 @@ function UserEditForm( { addUser = null } ) {
                     <CardTitle className="font-weight-bold text-center">
                         Keep Your Profile Up to Date!
                     </CardTitle>
-
-                    <Form onSubmit={handleSubmit}>
-                        <FormGroup>
-                            <Label for="username">Username*</Label>
-                            <Input type="text" name="username" username="menu" value={formData.username} disabled />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="password">Password*</Label>
-                            <Input type="password" name="password" id="password" onChange={handleChange} value={formData.password}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="first_name">First Name</Label>
-                            <Input type="text" name="first_name" id="first_name" onChange={handleChange} value={formData.first_name}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="last_name">Last Name</Label>
-                            <Input type="text" name="last_name" id="last_name" onChange={handleChange} value={formData.last_name}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="photo_url">Photo Address</Label>
-                            <Input type="text" name="photo_url" id="photo_url" onChange={handleChange} value={formData.photo_url}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="email">Email</Label>
-                            <Input type="text" name="email" id="email" onChange={handleChange} value={formData.email}/>
-                        </FormGroup>
-
-                        <Button>Submit</Button>
-                    </Form>
-
-                    <CardText>
-                        *Requried
-                    </CardText>
-
+                    {render()}
                 </CardBody>
             </Card>
         </section>

@@ -51,6 +51,7 @@ function UserDetail() {
                         {userDetails.jobs.map(job => UserJobCard(job))}
                     </ListGroup>
                 </CardBody>
+                
             )
         } 
 
