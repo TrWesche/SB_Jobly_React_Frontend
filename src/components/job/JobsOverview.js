@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardBody, CardTitle, CardText, ListGroup } from "reactstrap";
 import JobCard from "./subs/JobCard";
+import ContextSearch from "../ContextSearch";
 import apiJobly from "../../utils/apiJobly";
 
 function JobsOverview() {
@@ -14,8 +15,11 @@ function JobsOverview() {
     //         state: "CA"
     //     }]
 
+    const searchInitialState = {search: ""}
+
     const [jobList, setJobList] = useState([]);
     const [isReady, setIsReady] = useState(false);
+    const [searchFormData, setSearchFormData] = useState(searchInitialState);
 
     useEffect(() => {
         async function getJobs(min_salary = null, min_equity = null, search = null) {
@@ -27,6 +31,25 @@ function JobsOverview() {
         getJobs();
     }, [])
 
+    const handleSearchFromChange = (e) => {
+        let { name, value } = e.target;
+    
+        setSearchFormData(fData => ({
+            ...fData,
+            [name]: value
+        }));
+    };
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+
+        setIsReady(false);
+        let res = await apiJobly.searchJobs(searchFormData);
+        setJobList(res);
+        setIsReady(true);
+        setSearchFormData(searchInitialState);
+
+    }  
 
     const jobRender = () => {
         if (isReady) {
@@ -44,6 +67,7 @@ function JobsOverview() {
 
     return (
         <section>
+            <ContextSearch formData={searchFormData} handleSubmit={handleSearch} handleChange={handleSearchFromChange}/>
             <Card>
                 <CardBody>
                     <CardTitle>

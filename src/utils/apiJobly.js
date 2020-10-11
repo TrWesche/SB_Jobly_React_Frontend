@@ -92,6 +92,11 @@ class apiJobly {
         return res.companies;
     }
 
+    static async searchCompanies(searchParams) {
+        const res = await this.request("companies", searchParams);
+        return res.companies;
+    }
+
     static async getCompanyDetails(companyId) {
         const res = await this.request(`companies/${companyId}`)
         return res.company;
@@ -123,6 +128,11 @@ class apiJobly {
 
     static async getJobs() {
         const res = await this.request("jobs");
+        return res.jobs;
+    }
+
+    static async searchJobs(searchParams) {
+        const res = await this.request("jobs", searchParams);
         return res.jobs;
     }
 
