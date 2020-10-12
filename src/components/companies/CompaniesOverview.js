@@ -21,9 +21,13 @@ function CompaniesOverview() {
 
     useEffect(() => {
         async function getCompanies() {
-            let res = await apiJobly.getCompanies();
-            setCompanyList(res);
-            setIsReady(true);
+            try {
+                let res = await apiJobly.getCompanies();
+                setCompanyList(res);
+                setIsReady(true); 
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         getCompanies();
@@ -42,12 +46,15 @@ function CompaniesOverview() {
     const handleSearch = async (e) => {
         e.preventDefault();
 
-        setIsReady(false);
-        let res = await apiJobly.searchCompanies(searchFormData);
-        setCompanyList(res);
-        setIsReady(true);
-        setSearchFormData(searchInitialState);
-
+        try {
+            setIsReady(false);
+            let res = await apiJobly.searchCompanies(searchFormData);
+            setCompanyList(res);
+            setIsReady(true);
+            setSearchFormData(searchInitialState);   
+        } catch (error) {
+            console.log(error);
+        }
     }  
 
 

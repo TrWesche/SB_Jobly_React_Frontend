@@ -22,10 +22,14 @@ function JobsOverview() {
     const [searchFormData, setSearchFormData] = useState(searchInitialState);
 
     useEffect(() => {
-        async function getJobs(min_salary = null, min_equity = null, search = null) {
-            let res = await apiJobly.getJobs();
-            setJobList(res);
-            setIsReady(true);
+        async function getJobs() {
+            try {
+                let res = await apiJobly.getJobs();
+                setJobList(res);
+                setIsReady(true);     
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         getJobs();
@@ -43,11 +47,15 @@ function JobsOverview() {
     const handleSearch = async (e) => {
         e.preventDefault();
 
-        setIsReady(false);
-        let res = await apiJobly.searchJobs(searchFormData);
-        setJobList(res);
-        setIsReady(true);
-        setSearchFormData(searchInitialState);
+        try {
+            setIsReady(false);
+            let res = await apiJobly.searchJobs(searchFormData);
+            setJobList(res);
+            setIsReady(true);
+            setSearchFormData(searchInitialState);    
+        } catch (error) {
+            console.log(error);
+        }
 
     }  
 

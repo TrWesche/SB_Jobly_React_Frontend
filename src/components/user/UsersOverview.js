@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  } from "react";
 import { Card, CardBody, CardTitle, CardText, ListGroup } from "reactstrap";
 import UserCard from "./subs/UserCard";
 import apiJobly from "../../utils/apiJobly";
 
 function UsersOverview() {
-    const sampleValue = [
-        {
-            username: "testuser1",
-            first_name: "Hiya",
-            last_name: "ImTest",
-            email: "hiya.imtest@test.com"
-        }]
+    // const sampleValue = [
+    //     {
+    //         username: "testuser1",
+    //         first_name: "Hiya",
+    //         last_name: "ImTest",
+    //         email: "hiya.imtest@test.com"
+    //     }]
 
-    const [userList, setUserList] = useState(sampleValue);
+    const [userList, setUserList] = useState([]);
     const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
         async function getUsers() {
-            let res = await apiJobly.getUsers();
-            console.log(res)
-            setUserList(res);
-            setIsReady(true);
+            try {
+                let res = await apiJobly.getUsers();
+                console.log(res)
+                setUserList(res);
+                setIsReady(true);    
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         getUsers();

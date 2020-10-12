@@ -34,9 +34,13 @@ function CompanyDetail() {
 
     useEffect(() => {
         async function getCompanyDetails() {
-            let res = await apiJobly.getCompanyDetails(companyID);
-            setCompanyDetails(res);
-            setIsReady(true);
+            try {
+                let res = await apiJobly.getCompanyDetails(companyID);
+                setCompanyDetails(res);
+                setIsReady(true);
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         getCompanyDetails();

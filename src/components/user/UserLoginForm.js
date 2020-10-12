@@ -1,11 +1,16 @@
-import React, { useState } from "react";
-import { Card, CardBody, CardTitle, CardText, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import React, { useState, useContext } from "react";
+import { Redirect } from "react-router-dom";
+import { Form, FormGroup, Label, Input, Button, UncontrolledAlert } from "reactstrap";
+import apiJobly from "../../utils/apiJobly";
+import {AuthContext} from "../AuthContext";
 
-
-function UserLoginForm( { loginUser = null } ) {
+function UserLoginForm({ toggle = null }) {
     const INITIAL_STATE = {username: "", password: ""}
+    const {authToken, setAuthToken} = useContext(AuthContext);
+
     const [formData, setFormData] = useState(INITIAL_STATE);
-  
+    const [alerts, setAlerts] = useState([]);
+
     // Function for controlling form data
     const handleChange = (e) => {
       let { name, value } = e.target;
@@ -19,39 +24,47 @@ function UserLoginForm( { loginUser = null } ) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const success = loginUser(formData);
+        try {
+            const res = await apiJobly.loginUser(formData);
+            setAuthToken(res);
+            toggle();
+        } catch (error) {
+            setAlerts(error);
+        }
 
-        // if (success) {
-        //     setFormData(INITIAL_STATE);
-        // }
+        setFormData(INITIAL_STATE);
     }
 
 
+    const render = () => {
+        if (authToken) {
+            return (<Redirect to="/" />)
+        } else {
+            return (
+                <Form onSubmit={handleSubmit}>
+                    {alerts.map(alert => {
+                        return (
+                            <UncontrolledAlert color="danger" key={`LoginForm${alert}`}>{alert}</UncontrolledAlert>
+                        )
+                    })}
+
+                    <FormGroup>
+                        <Label for="username">Username*</Label>
+                        <Input type="text" name="username" username="menu" onChange={handleChange} value={formData.username} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Password*</Label>
+                        <Input type="password" name="password" id="password" onChange={handleChange} value={formData.password}/>
+                    </FormGroup>
+
+                    <Button>Submit</Button>
+                </Form>
+            )
+        }
+    }
 
     return (
-        <section>
-            <Card>
-                <CardBody>
-                    <CardTitle className="font-weight-bold text-center">
-                        Login
-                    </CardTitle>
-
-                    <Form onSubmit={handleSubmit}>
-                        <FormGroup>
-                            <Label for="username">Username*</Label>
-                            <Input type="text" name="username" username="menu" onChange={handleChange} value={formData.username} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="password">Password*</Label>
-                            <Input type="password" name="password" id="password" onChange={handleChange} value={formData.password}/>
-                        </FormGroup>
-
-                        <Button>Submit</Button>
-                    </Form>
-
-                </CardBody>
-            </Card>
-        </section>
+        render()
     );
 }
 

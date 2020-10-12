@@ -29,9 +29,13 @@ function JobDetail() {
     useEffect(() => {
 
         async function getTargetJob() {
-            let job = await apiJobly.getJobDetails(jobID);
-            setJobDetails(job);
-            setIsReady(true);
+            try {
+                let job = await apiJobly.getJobDetails(jobID);
+                setJobDetails(job);
+                setIsReady(true);    
+            } catch (error) {
+                console.log(error)
+            }
         }
 
         getTargetJob();

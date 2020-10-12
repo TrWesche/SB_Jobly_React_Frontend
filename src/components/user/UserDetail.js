@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg, Button, CardLink } from "reactstrap";
 import JobCard from "../job/subs/JobCard";
 import apiJobly from "../../utils/apiJobly";
-
+import ModalContainer from "../ModalContainer";
+import UserEditForm from "../user/UserEditForm";
 
 function UserDetail() {
     const { username } = useParams();
@@ -29,9 +30,13 @@ function UserDetail() {
 
     useEffect(() => {
         async function getUser() {
-            let res = await apiJobly.getUserDetails(username);
-            setUserDetails(res);
-            setIsReady(true);
+            try {
+                let res = await apiJobly.getUserDetails(username);
+                setUserDetails(res);
+                setIsReady(true);
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         getUser();
@@ -47,12 +52,11 @@ function UserDetail() {
                         <h2>{userDetails.first_name} {userDetails.last_name}</h2>
                     </CardTitle>
                     <CardText>Email: {userDetails.email}</CardText>
-                    <CardLink href={`/users/${userDetails.username}/edit`}>Update</CardLink>
+                    <ModalContainer buttonLabel="Update" className="UpdateFrom" headerText="Update" BodyRender={UserEditForm} />
                     <ListGroup>
                         {userDetails.jobs.map(job => JobCard(job))}
                     </ListGroup>
                 </CardBody>
-                
             )
         } 
 

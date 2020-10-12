@@ -11,6 +11,8 @@ import CompanyDetail from "../components/companies/CompanyDetail";
 import JobsOverview from "../components/job/JobsOverview";
 import JobDetail from "../components/job/JobDetail";
 
+// NOTE: This is currently not used, potenial to refactor this to consist of the private/public routes or delete
+
 function Routes() {
 
     return (

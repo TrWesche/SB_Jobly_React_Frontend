@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import SessionContext from "./SessionContext";
+import {AuthContext} from "./AuthContext";
 import {NavLink} from "react-router-dom";
 import "./NavBar.css";
 import { 
@@ -14,14 +14,14 @@ import {
     DropdownMenu, 
     DropdownItem
  } from "reactstrap";
+import ModalContainer from "./ModalContainer";
+import UserLoginForm from "./user/UserLoginForm";
+import NewUserFrom from "./user/NewUserForm";
 
-function JoblyNavBar() {
-    const {loggedIn, username} = useContext(SessionContext);
-
+function JoblyNavBar( {currentUser} ) {
+    const {authToken, setAuthToken, clearAuthToken} = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
-    
     const toggle = () => setIsOpen(!isOpen);
-
 
     const navLoggedIn = (
         <Collapse isOpen={isOpen} navbar>
@@ -42,14 +42,14 @@ function JoblyNavBar() {
                 </DropdownToggle>
                 <DropdownMenu right>
                     <DropdownItem>
-                        <NavLink to={`/users/${username}`}>Profile</NavLink>
+                        <NavLink to={currentUser ? `/users/${currentUser.username}` : "/"}>Profile</NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                        <NavLink to={`/users/${username}/edit`}>Settings</NavLink>
+                        <NavLink to={currentUser ? `/users/${currentUser.username}/edit` : "/"}>Settings</NavLink>
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem>
-                        <NavLink to="/logout">Logout</NavLink>
+                        <a href="#" onClick={clearAuthToken}>Logout</a>
                     </DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown>
@@ -58,12 +58,12 @@ function JoblyNavBar() {
 
     const navLoggedOut = (
         <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto">
+            <Nav navbar>
                 <NavItem>
-                    <NavLink to="/login">Login</NavLink>
+                    <ModalContainer buttonLabel="Login" className="LoginForm" headerText="Login" BodyRender={UserLoginForm} />
                 </NavItem>
                 <NavItem>
-                    <NavLink to="/register">Register</NavLink>
+                    <ModalContainer buttonLabel="Register" className="RegisterForm" headerText="Sign Up" BodyRender={NewUserFrom} />
                 </NavItem>
             </Nav>
         </Collapse>
@@ -74,7 +74,7 @@ function JoblyNavBar() {
             <Navbar dark expand="md">
                 <NavbarBrand href="/" className="mr-auto">Job.ly</NavbarBrand>
                 <NavbarToggler onClick={toggle} className="mr-2"/>
-                {loggedIn ? navLoggedIn : navLoggedOut}
+                {authToken ? navLoggedIn : navLoggedOut}
             </Navbar>
         </div>
     )
