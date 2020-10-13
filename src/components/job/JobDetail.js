@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, CardBody, CardTitle, CardText, ListGroup, CardLink } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, Col, Row } from "reactstrap";
 import JobCompanyCard from "./subs/JobCompanyCard";
 import apiJobly from "../../utils/apiJobly";
+import "./JobDetail.css";
 
 function JobDetail() {
     // const sampleValue = 
@@ -39,7 +40,7 @@ function JobDetail() {
         }
 
         getTargetJob();
-    }, [])
+    }, [jobID])
 
 
     
@@ -47,13 +48,19 @@ function JobDetail() {
         if (isReady) {
             return (
                 <CardBody>
-                    <CardTitle>
-                        <h2>{jobDetails.title}</h2>
-                    </CardTitle>
-                    <CardText>Salary: {jobDetails.salary}</CardText>
-                    <CardText>Equity: {jobDetails.equity}</CardText>
-                        {JobCompanyCard(jobDetails.company)}
-                    <CardLink href={`/companies/${jobDetails.company_handle}`}>View Company Details</CardLink>
+                    <Row className="job-about">
+                        <CardTitle>
+                            <h2>{jobDetails.title}</h2>
+                        </CardTitle>
+                        <CardText>Salary: {jobDetails.salary}</CardText>
+                        <CardText>Equity: {jobDetails.equity}</CardText>
+                    </Row>
+                    <Row className="company-card">
+                        <CardTitle className="company-card-title">
+                            About {jobDetails.company.name}
+                        </CardTitle>
+                        {JobCompanyCard({...jobDetails.company, company_handle: jobDetails.company_handle})}
+                    </Row>
                 </CardBody>
             )
         } 
@@ -68,8 +75,12 @@ function JobDetail() {
 
     return (
         <section>
-            <Card>
+            <Card className="job-detail-main">
+                <Col sm="1" xl="2"/>
+                <Col sm="10" xl="8">
                 {jobRender()}
+                </Col>
+                <Col sm="1" xl="2"/>
             </Card>
         </section>
     )

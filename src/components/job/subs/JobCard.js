@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {ListGroupItem, Card, CardTitle, CardText, Button, Col, Row } from "reactstrap";
+import {ListGroupItem, Card, CardTitle, CardText, Col, Row } from "reactstrap";
 import "./JobCard.css";
 
 function JobCard(job, handleJobAction) {

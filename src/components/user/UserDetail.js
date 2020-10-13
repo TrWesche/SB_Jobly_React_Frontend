@@ -41,7 +41,7 @@ function UserDetail() {
         }
 
         getUser();
-    }, [])
+    }, [username])
 
 
     const handleJobAction = async (targetJob, state) => {
@@ -95,15 +95,13 @@ function UserDetail() {
 
     return (
         <section>
-            
             <Card className="user-detail-main">
                 <Col sm="1" xl="2"/>
                 <Col sm="10" xl="8">
                     {render()}
                 </Col>
                 <Col sm="1" xl="2"/>
-            </Card>
-            
+            </Card> 
         </section>
     )
 

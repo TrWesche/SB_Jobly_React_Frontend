@@ -1,0 +1,27 @@
+.job-detail-main {
+    flex-direction: row;
+}
+
+.job-about {
+    flex-direction: column;
+    padding: 2rem;
+    background-color: rgba(196,196,196,0.2);
+    border-radius: 0.5rem;
+}
+
+.company-card {
+    flex-direction: column;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(64, 64, 64, 0.2);
+    border-radius: 0%; 
+}
+
+.company-card-title {
+    background-color: rgba(62,62,62,0.6);
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+}

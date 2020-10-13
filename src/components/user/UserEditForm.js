@@ -28,7 +28,7 @@ function UserEditForm({ toggle = null }) {
         }
 
         getUser();
-    })
+    }, [username])
 
     const format = ({password, first_name, last_name, photo_url, email}) => {
         return ({password, first_name, last_name, photo_url, email});

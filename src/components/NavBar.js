@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import {AuthContext} from "./AuthContext";
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 import "./NavBar.css";
 import { 
     Navbar, 
     Nav, 
     NavItem, 
-    NavbarBrand, 
     NavbarToggler,
     Collapse,
     UncontrolledDropdown, 
@@ -72,7 +71,7 @@ function JoblyNavBar( {currentUser} ) {
     return (
         <div>
             <Navbar dark expand="md">
-                <NavbarBrand href="/" className="mr-auto">Job.ly</NavbarBrand>
+                <Link to="/" className="mr-auto navbar-brand">Job.ly</Link>
                 <NavbarToggler onClick={toggle} className="mr-2"/>
                 {authToken ? navLoggedIn : navLoggedOut}
             </Navbar>

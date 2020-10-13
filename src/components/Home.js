@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { Card, CardBody, CardLink, CardTitle, Col, Row, CardSubtitle } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Card, CardBody, CardTitle, Col, Row, CardSubtitle } from "reactstrap";
 import { AuthContext } from "./AuthContext";
 import "./Home.css";
 
@@ -23,9 +24,15 @@ function Home() {
                     </Row>
                     {!authToken &&    
                     <Row>
-                        <CardBody className="home-login">
-                            <CardLink  href="/login">Login</CardLink>
-                            <CardLink  href="/register">Don't Have an Account?</CardLink>
+                        <CardBody>
+                            <Col>
+                                <Row className="home-login">
+                                    <Link to="/login">Login</Link>
+                                </Row>
+                                <Row className="home-register">
+                                    <Link to="/register">Don't Have an Account?</Link>
+                                </Row>
+                            </Col>
                         </CardBody>
                     </Row>
                     }

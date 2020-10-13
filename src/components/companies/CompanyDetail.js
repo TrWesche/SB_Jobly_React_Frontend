@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg, Col, Row } from "reactstrap";
 import JobCard from "../job/subs/JobCard";
 import apiJobly from "../../utils/apiJobly";
+import "./CompanyDetail.css";
 
 function CompanyDetail() {
     const { companyID } = useParams();
@@ -44,7 +45,7 @@ function CompanyDetail() {
         }
 
         getCompanyDetails();
-    }, [])
+    }, [companyID])
 
     const handleJobAction = async (targetJob, state) => {
         if (state === "applied") {
@@ -68,15 +69,24 @@ function CompanyDetail() {
         if (isReady) {
             return (
                 <CardBody>
-                    <CardImg width="10%" src={companyDetails.logo_url} alt={`${companyDetails.name} logo`}></CardImg>
-                    <CardTitle>
-                        <h2>{companyDetails.name}</h2>
-                    </CardTitle>
-                    <CardText>{companyDetails.description}</CardText>
-                    <CardText>{companyDetails.num_employees}</CardText>
-                    <ListGroup>
-                        {companyDetails.jobs.map(job => JobCard(job, handleJobAction))}
-                    </ListGroup>
+                    <Row className="company-about">
+                        <Col sm="2">
+                            <CardImg width="10%" src={companyDetails.logo_url} alt={`${companyDetails.name} logo`}></CardImg>
+                        </Col>
+                        <Col sm="10">
+                            <CardTitle>
+                                <h2>{companyDetails.name}</h2>
+                            </CardTitle>
+                            <CardText>About: {companyDetails.description}</CardText>
+                            <CardText>Company Size: {companyDetails.num_employees} Employees</CardText>
+                        </Col>
+                    </Row>
+                    <Row className="company-jobs">
+                        <CardTitle className="company-listings-title">Current Openings:</CardTitle>
+                        <ListGroup>
+                            {companyDetails.jobs.map(job => JobCard(job, handleJobAction))}
+                        </ListGroup>
+                    </Row>
                 </CardBody>
             )
         } 
@@ -88,8 +98,12 @@ function CompanyDetail() {
 
     return (
         <section>
-            <Card>
-                {render()}
+            <Card className="company-detail-main">
+                <Col sm="1" xl="2"/>
+                <Col sm="10" xl="8">
+                    {render()}
+                </Col>
+                <Col sm="1" xl="2"/>
             </Card>
         </section>
     )

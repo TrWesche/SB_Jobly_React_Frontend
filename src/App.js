@@ -70,7 +70,8 @@ function App() {
                     <UsersOverview />
                 </PrivateRoute>
                 <PrivateRoute path="/users/:username/edit">
-                    <UserEditForm />
+                    <FormContainer className="user-edit-form" title="Update Profile" BodyRender={UserEditForm} />
+                    
                 </PrivateRoute>
                 <PrivateRoute path="/users/:username">
                     <UserDetail />

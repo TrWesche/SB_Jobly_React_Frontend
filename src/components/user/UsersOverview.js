@@ -20,7 +20,6 @@ function UsersOverview() {
         async function getUsers() {
             try {
                 let res = await apiJobly.getUsers();
-                console.log(res)
                 setUserList(res);
                 setIsReady(true);    
             } catch (error) {

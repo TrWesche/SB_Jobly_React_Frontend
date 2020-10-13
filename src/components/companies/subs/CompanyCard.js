@@ -1,5 +1,6 @@
 import React from "react";
-import {ListGroupItem, Card, CardTitle, CardText, CardImg, CardBody, CardLink, Col } from "reactstrap";
+import { Link } from "react-router-dom";
+import {ListGroupItem, Card, CardTitle, CardText, CardImg, CardBody, Col } from "reactstrap";
 import "./CompanyCard.css";
 
 function JobCompanyCard({  handle, name, description, logo_url }) {
@@ -15,7 +16,7 @@ function JobCompanyCard({  handle, name, description, logo_url }) {
                             <h4>{name}</h4>
                         </CardTitle>
                         <CardText>About: {description}</CardText>
-                        <CardLink className="company-card-link" href={`/companies/${handle}`}>Details</CardLink>
+                        <Link className="company-card-link" to={`/companies/${handle}`}>Details</Link>
                     </CardBody>
                 </Col>
             </Card>

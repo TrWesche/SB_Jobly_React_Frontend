@@ -1,6 +1,4 @@
 import axios from 'axios';
-// import { useContext } from "react";
-import { useAuth } from "../components/AuthContext";
 
 const BASE_URL_API = 'http://localhost:3001';
 
@@ -20,7 +18,7 @@ class apiJobly {
         try {
           return (await axios({
             method: verb,
-            url: `http://localhost:3001/${endpoint}`,
+            url: `${BASE_URL_API}/${endpoint}`,
             [verb === "get" ? "params" : "data"]: paramsOrData})).data;
             // axios sends query string data via the "params" key,
             // and request body data via the "data" key,
