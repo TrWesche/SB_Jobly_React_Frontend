@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 const ModalContainer = (props) => {
   const {
@@ -14,7 +14,7 @@ const ModalContainer = (props) => {
   const toggle = () => setModal(!modal);
 
   return (
-    <div>
+    <div className="modal-container">
       <Button onClick={toggle}>{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>{headerText}</ModalHeader>

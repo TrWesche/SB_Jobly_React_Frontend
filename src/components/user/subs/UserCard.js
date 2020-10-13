@@ -1,16 +1,19 @@
 import React from "react";
-import {ListGroupItem, Card, CardTitle, CardText, CardLink} from "reactstrap";
+import {ListGroupItem, Card, CardTitle, CardText, CardLink, Col} from "reactstrap";
 
 function UserCard({ username, first_name, last_name, email }) {
     return (
         <ListGroupItem key={username}>
             <Card>
-                <CardTitle>
-                    <h4>{username}</h4>
-                </CardTitle>
-                <CardText>{first_name} {last_name}</CardText>
-                <CardText>{email}</CardText>
-                <CardLink href={`/users/${username}`}>View Profile</CardLink>
+                <Col sm="10">
+                    <CardTitle>
+                        <h4>{username}: {first_name} {last_name}</h4>
+                    </CardTitle>
+                    <CardText>{email}</CardText>
+                </Col>
+                <Col sm="2">
+                    <CardLink href={`/users/${username}`}>View Profile</CardLink>
+                </Col>
             </Card>
         </ListGroupItem>
     )

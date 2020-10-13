@@ -1,7 +1,8 @@
-import React, { useState, useEffect,  } from "react";
-import { Card, CardBody, CardTitle, CardText, ListGroup } from "reactstrap";
+import React, { useState, useEffect } from "react";
+import { Card, CardBody, CardTitle, CardText, ListGroup, Col } from "reactstrap";
 import UserCard from "./subs/UserCard";
 import apiJobly from "../../utils/apiJobly";
+import "./UsersOverview.css";
 
 function UsersOverview() {
     // const sampleValue = [
@@ -34,7 +35,7 @@ function UsersOverview() {
     const render = () => {
         if (isReady) {
             return (
-                <ListGroup>
+                <ListGroup className="users-overview-list">
                     {userList.map(user => {
                         return UserCard(user);
                     })}
@@ -49,16 +50,18 @@ function UsersOverview() {
     
     return (
         <section>
-            <Card>
-                <CardBody>
-                    <CardTitle>
-                        <h2>Users</h2>
-                    </CardTitle>
-                    <CardText>We have some of the greatest people in the world on Job.ly.</CardText>
-                    <CardText>TODO: Search Functionality</CardText>
-                    {render()}
-                </CardBody>
-                
+            <Card className="users-overview-main">
+                <Col sm="1" xl="2"/>
+                <Col sm="10" xl="8">
+                    <CardBody className="users-overview-body">
+                        <CardTitle className="users-overview-title">
+                            <h2>Users</h2>
+                        </CardTitle>
+                        <CardText className="users-overview-desc">We have some of the greatest people in the world on Job.ly.</CardText>
+                        {render()}
+                    </CardBody>
+                </Col>
+                <Col sm="1" xl="8"/>
             </Card>
         </section>
     )

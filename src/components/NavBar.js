@@ -19,7 +19,7 @@ import UserLoginForm from "./user/UserLoginForm";
 import NewUserFrom from "./user/NewUserForm";
 
 function JoblyNavBar( {currentUser} ) {
-    const {authToken, setAuthToken, clearAuthToken} = useContext(AuthContext);
+    const {authToken, clearAuthToken} = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
@@ -27,13 +27,13 @@ function JoblyNavBar( {currentUser} ) {
         <Collapse isOpen={isOpen} navbar>
             <Nav navbar>
                 <NavItem>
-                    <NavLink to="/users">Users</NavLink>
+                    <NavLink className="navbar-link" to="/users">Users</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink to="/companies">Companies</NavLink>
+                    <NavLink className="navbar-link" to="/companies">Companies</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink to="/jobs">Jobs</NavLink>
+                    <NavLink className="navbar-link" to="/jobs">Jobs</NavLink>
                 </NavItem>
             </Nav>
             <UncontrolledDropdown >
@@ -48,8 +48,8 @@ function JoblyNavBar( {currentUser} ) {
                         <NavLink to={currentUser ? `/users/${currentUser.username}/edit` : "/"}>Settings</NavLink>
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>
-                        <a href="#" onClick={clearAuthToken}>Logout</a>
+                    <DropdownItem onClick={clearAuthToken}>
+                        Logout
                     </DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown>
@@ -57,8 +57,8 @@ function JoblyNavBar( {currentUser} ) {
     )
 
     const navLoggedOut = (
-        <Collapse isOpen={isOpen} navbar>
-            <Nav navbar>
+        <Collapse isOpen={isOpen} navbar className="navbar-logout">
+            <Nav navbar >
                 <NavItem>
                     <ModalContainer buttonLabel="Login" className="LoginForm" headerText="Login" BodyRender={UserLoginForm} />
                 </NavItem>

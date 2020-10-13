@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg, Button, CardLink } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg } from "reactstrap";
 import JobCard from "../job/subs/JobCard";
 import apiJobly from "../../utils/apiJobly";
 import ModalContainer from "../ModalContainer";

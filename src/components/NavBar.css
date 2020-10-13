@@ -13,6 +13,10 @@ nav a {
   text-decoration: none;
 }
 
+/* nav a:not(.navbar-brand) {
+  padding: 0.3rem 0.5rem;
+} */
+
 nav a.active {
   color: #f0f2f5;
   font-weight: bold;
@@ -33,8 +37,16 @@ nav a.active.navbar-brand {
   border-bottom: none;
 }
 
-nav a:not(.navbar-brand):hover {
-  font-weight: bold;
+/* nav a:not(.navbar-brand):hover {
+  background-color: rgba(96,96,96,0.8);
+} */
+
+.navbar-link {
+  padding: 0.3rem 0.5rem;
+}
+
+.navbar-link:hover {
+  background-color: rgba(96,96,96,0.8);
 }
 
 .navbar-collapse {
@@ -45,6 +57,28 @@ nav a:not(.navbar-brand):hover {
   background-color: rgba(64, 64, 64, 0.8);
 }
 
+.dropdown-item {
+  color: white;
+}
+
 .dropdown-item:hover {
   background-color: rgba(128, 128, 128, 0.8);
+}
+
+.modal-container button {
+  display: flex;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 0%;
+  margin: 0px 1rem;
+  padding: 0.3rem 0.5rem;
+}
+
+.modal-container button:hover {
+  background-color: rgba(96,96,96,0.8);
+  border-color: transparent;
+}
+
+.navbar-logout {
+  justify-content: right;
 }

@@ -9,7 +9,7 @@ import {AuthContext} from "../AuthContext";
 function UserEditForm({ toggle = null }) {
     const INITIAL_STATE = { password: "", first_name: "", last_name: "", photo_url: "", email: "" }
     const { username } = useParams();
-    const {authToken, setAuthToken} = useContext(AuthContext);
+    const { authToken } = useContext(AuthContext);
     
     const [formData, setFormData] = useState(INITIAL_STATE);
     const [alerts, setAlerts] = useState([]);
@@ -28,7 +28,7 @@ function UserEditForm({ toggle = null }) {
         }
 
         getUser();
-    }, [])
+    })
 
     const format = ({password, first_name, last_name, photo_url, email}) => {
         return ({password, first_name, last_name, photo_url, email});
@@ -48,7 +48,7 @@ function UserEditForm({ toggle = null }) {
         e.preventDefault();
         
         try {
-            const res = await apiJobly.updateUserDetails(username, format(formData));
+            await apiJobly.updateUserDetails(username, format(formData));
             setIsChanged(true);
             toggle();
         } catch (error) {
