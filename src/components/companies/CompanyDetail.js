@@ -46,6 +46,24 @@ function CompanyDetail() {
         getCompanyDetails();
     }, [])
 
+    const handleJobAction = async (targetJob, state) => {
+        if (state === "applied") {
+            await apiJobly.applyToJob(targetJob.id, {state});
+        }
+
+        if (state === "retracted") {
+            await apiJobly.retractApplication(targetJob.id);
+        }
+        
+        const updatedList = companyDetails.jobs.map((job) => {
+            if (targetJob.id === job.id) {
+                job.state = state;
+            }
+            return job;
+        })
+        setCompanyDetails({...companyDetails, jobs: updatedList})
+    }
+
     const render = () => {
         if (isReady) {
             return (
@@ -57,7 +75,7 @@ function CompanyDetail() {
                     <CardText>{companyDetails.description}</CardText>
                     <CardText>{companyDetails.num_employees}</CardText>
                     <ListGroup>
-                        {companyDetails.jobs.map(job => JobCard(job))}
+                        {companyDetails.jobs.map(job => JobCard(job, handleJobAction))}
                     </ListGroup>
                 </CardBody>
             )

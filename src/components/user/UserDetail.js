@@ -43,6 +43,23 @@ function UserDetail() {
     }, [])
 
 
+    const handleJobAction = async (targetJob, state) => {
+        if (state === "applied") {
+            await apiJobly.applyToJob(targetJob.id, {state});
+        }
+
+        if (state === "retracted") {
+            await apiJobly.retractApplication(targetJob.id);
+        }
+        
+        const updatedList = userDetails.jobs.filter((job) => {
+            if (targetJob.id !== job.id) {
+                return job;
+            }
+        })
+        setUserDetails({...userDetails, jobs: updatedList})
+    }
+
     const render = () => {
         if (isReady) {
             return (
@@ -54,7 +71,7 @@ function UserDetail() {
                     <CardText>Email: {userDetails.email}</CardText>
                     <ModalContainer buttonLabel="Update" className="UpdateFrom" headerText="Update" BodyRender={UserEditForm} />
                     <ListGroup>
-                        {userDetails.jobs.map(job => JobCard(job))}
+                        {userDetails.jobs.map(job => JobCard(job, handleJobAction))}
                     </ListGroup>
                 </CardBody>
             )
