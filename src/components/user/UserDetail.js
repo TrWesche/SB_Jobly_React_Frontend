@@ -6,7 +6,6 @@ import apiJobly from "../../utils/apiJobly";
 import ModalContainer from "../ModalContainer";
 import UserEditForm from "../user/UserEditForm";
 import "./UserDetail.css";
-import "../job/subs/JobCard.css"
 
 function UserDetail() {
     const { username } = useParams();

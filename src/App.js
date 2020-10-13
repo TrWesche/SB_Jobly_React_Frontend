@@ -64,7 +64,7 @@ function App() {
                     <FormContainer className="login-form" title="Login" BodyRender={UserLoginForm} />
                 </Route>
                 <Route exact path="/register">
-                    <NewUserForm />
+                    <FormContainer className="new-user-form" title="Register" BodyRender={NewUserForm} />
                 </Route>
                 <PrivateRoute exact path="/users">
                     <UsersOverview />

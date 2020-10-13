@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardBody, CardTitle, CardText, ListGroup } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, ListGroup, Col } from "reactstrap";
 import CompanyCard from "./subs/CompanyCard";
 import ContextSearch from "../ContextSearch";
 import apiJobly from "../../utils/apiJobly";
+import "./CompaniesOverview.css";
 
 function CompaniesOverview() {
     // const sampleValue = [
@@ -61,7 +62,7 @@ function CompaniesOverview() {
     const render = () => {
         if (isReady) {
             return (
-                <ListGroup>
+                <ListGroup className="companies-overview-list">
                     {companyList.map(company => CompanyCard(company))}
                 </ListGroup>
             )
@@ -74,15 +75,18 @@ function CompaniesOverview() {
 
     return (
         <section>
-            <ContextSearch formData={searchFormData} handleSubmit={handleSearch} handleChange={handleSearchFromChange}/>
-            <Card>
-                <CardBody>
-                    <CardTitle>
-                        <h2>Companies Overview Placeholder</h2>
-                    </CardTitle>
-                    <CardText>To be completed.</CardText>
-                    {render()}
-                </CardBody>
+            <Card className="companies-overview-main">
+                <Col sm="1" xl="2"/>
+                <Col sm="10" xl="8">
+                    <CardBody>
+                        <CardTitle>
+                            <h2>Browse Potential Employers</h2>
+                        </CardTitle>
+                        <ContextSearch formData={searchFormData} handleSubmit={handleSearch} handleChange={handleSearchFromChange}/>
+                        {render()}
+                    </CardBody>
+                </Col>
+                <Col sm="1" xl="2"/>
             </Card>
         </section>
     )

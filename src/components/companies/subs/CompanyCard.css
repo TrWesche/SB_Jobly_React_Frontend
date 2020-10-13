@@ -1,0 +1,9 @@
+.list-group-item {
+    padding: 1rem;
+    border-radius: 0%;
+}
+
+.list-group-item .card {
+    padding: 0.5rem;
+    flex-direction: row;
+}

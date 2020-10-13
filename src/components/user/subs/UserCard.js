@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {ListGroupItem, Card, CardTitle, CardText, Col } from "reactstrap";
+import "./UserCard.css";
 
 function UserCard({ username, first_name, last_name, email }) {
     return (
