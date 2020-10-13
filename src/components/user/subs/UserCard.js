@@ -1,5 +1,6 @@
 import React from "react";
-import {ListGroupItem, Card, CardTitle, CardText, CardLink, Col} from "reactstrap";
+import { Link } from "react-router-dom";
+import {ListGroupItem, Card, CardTitle, CardText, Col } from "reactstrap";
 
 function UserCard({ username, first_name, last_name, email }) {
     return (
@@ -12,7 +13,7 @@ function UserCard({ username, first_name, last_name, email }) {
                     <CardText>{email}</CardText>
                 </Col>
                 <Col sm="2">
-                    <CardLink href={`/users/${username}`}>View Profile</CardLink>
+                    <Link to={`/users/${username}`}>View Profile</Link>
                 </Col>
             </Card>
         </ListGroupItem>

@@ -1,0 +1,16 @@
+.job-card-applied {
+    margin: 0.25rem 0.5rem;
+    font-weight: bolder;
+    text-decoration: underline;
+    color: darkgreen;
+}
+
+.job-card-links {
+    display: flex;
+    justify-content: right;
+}
+
+.job-card-links a {
+    display: flex;
+    margin: 0rem 0.75rem;
+}

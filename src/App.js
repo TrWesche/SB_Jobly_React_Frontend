@@ -10,6 +10,7 @@ import apiJobly from "./utils/apiJobly";
 import { decode } from 'jsonwebtoken';
 
 import Home from "./components/Home";
+import FormContainer from "./components/FormContainer";
 import NewUserForm from "./components/user/NewUserForm";
 import UserLoginForm from "./components/user/UserLoginForm";
 import UsersOverview from "./components/user/UsersOverview";
@@ -60,7 +61,7 @@ function App() {
                     <Home />
                 </Route>
                 <Route exact path="/login">
-                    <UserLoginForm />
+                    <FormContainer className="login-form" title="Login" BodyRender={UserLoginForm} />
                 </Route>
                 <Route exact path="/register">
                     <NewUserForm />

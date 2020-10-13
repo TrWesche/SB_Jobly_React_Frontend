@@ -1,5 +1,6 @@
 import React from "react";
-import {ListGroupItem, Card, CardTitle, CardText, CardLink } from "reactstrap";
+import { Link } from "react-router-dom";
+import {ListGroupItem, Card, CardTitle, CardText, Button, Col, Row } from "reactstrap";
 
 function JobCard(job, handleJobAction) {
     const { id, title, company_handle = null, salary = null, equity = null, state = null } = job;
@@ -17,15 +18,21 @@ function JobCard(job, handleJobAction) {
     return (
         <ListGroupItem key={id}>
             <Card>
-                <CardTitle>
-                    <h4>{title}</h4>
-                </CardTitle>
-                {state && <CardText>Applied</CardText>}
-                {company_handle && <CardText>{company_handle}</CardText>}
-                {salary && <CardText>Salary: {salary}</CardText>}
-                {equity && <CardText>Equity: {equity}</CardText>}
-                <CardLink href={`/jobs/${id}`}>View Details</CardLink>
-                <CardLink onClick={handleApply}>{state === "applied" ? "Retract" : "Apply"}</CardLink>
+                <Col sm="8">
+                    <Row>
+                        <CardTitle>
+                            <h4>{title}</h4>
+                        </CardTitle>
+                        {state && <CardText className="job-card-applied">Applied</CardText>}
+                    </Row>
+                    {company_handle && <CardText>{company_handle}</CardText>}
+                    {salary && <CardText>Salary: {salary}</CardText>}
+                    {equity && <CardText>Equity: {equity}</CardText>}
+                </Col>
+                <Col sm="4" className="job-card-links">
+                    <Link to={`/jobs/${id}`}>View Details</Link>
+                    <Link onClick={handleApply}>{state === "applied" ? "Retract" : "Apply"}</Link>
+                </Col>
             </Card>
         </ListGroupItem>
     )

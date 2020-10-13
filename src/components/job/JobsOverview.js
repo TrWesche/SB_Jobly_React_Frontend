@@ -3,6 +3,7 @@ import { Card, CardBody, CardTitle, CardText, ListGroup } from "reactstrap";
 import JobCard from "./subs/JobCard";
 import ContextSearch from "../ContextSearch";
 import apiJobly from "../../utils/apiJobly";
+import "./subs/JobCard.css";
 
 function JobsOverview() {
     // const sampleValue = [

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, ListGroup, CardImg, Col, Row } from "reactstrap";
 import JobCard from "../job/subs/JobCard";
 import apiJobly from "../../utils/apiJobly";
 import ModalContainer from "../ModalContainer";
 import UserEditForm from "../user/UserEditForm";
+import "./UserDetail.css";
+import "../job/subs/JobCard.css"
 
 function UserDetail() {
     const { username } = useParams();
@@ -64,15 +66,23 @@ function UserDetail() {
         if (isReady) {
             return (
                 <CardBody>
-                    <CardImg width="10%" src={userDetails.photo_url} alt="User Photo"></CardImg>
-                    <CardTitle>
-                        <h2>{userDetails.first_name} {userDetails.last_name}</h2>
-                    </CardTitle>
-                    <CardText>Email: {userDetails.email}</CardText>
-                    <ModalContainer buttonLabel="Update" className="UpdateFrom" headerText="Update" BodyRender={UserEditForm} />
-                    <ListGroup>
-                        {userDetails.jobs.map(job => JobCard(job, handleJobAction))}
-                    </ListGroup>
+                        <Row>
+                            <Col>
+                                <CardImg width="10%" src={userDetails.photo_url} alt="User Photo"></CardImg>
+                            </Col>
+                            <Col>
+                                <CardTitle>
+                                    <h2>{userDetails.first_name} {userDetails.last_name}</h2>
+                                </CardTitle>
+                                <CardText>Email: {userDetails.email}</CardText>
+                                <ModalContainer buttonLabel="Update" className="UpdateFrom" headerText="Update" BodyRender={UserEditForm} />
+                            </Col>
+                        </Row>
+                        <Row className="user-applied-jobs">
+                            <ListGroup>
+                                {userDetails.jobs.map(job => JobCard(job, handleJobAction))}
+                            </ListGroup>
+                        </Row>
                 </CardBody>
             )
         } 
@@ -86,9 +96,15 @@ function UserDetail() {
 
     return (
         <section>
-            <Card>
-                {render()}
+            
+            <Card className="user-detail-main">
+                <Col sm="1" xl="2"/>
+                <Col sm="10" xl="8">
+                    {render()}
+                </Col>
+                <Col sm="1" xl="2"/>
             </Card>
+            
         </section>
     )
 
