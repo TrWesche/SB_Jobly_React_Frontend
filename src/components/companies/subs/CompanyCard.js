@@ -1,7 +1,7 @@
 import React from "react";
 import {ListGroupItem, Card, CardTitle, CardText, CardImg, CardBody, CardLink } from "reactstrap";
 
-function CompanyCard({ handle, name, description, logo_url }) {
+function JobCompanyCard({  handle, name, description, logo_url }) {
     return (
         <ListGroupItem key={handle}>
             <Card>
@@ -11,11 +11,11 @@ function CompanyCard({ handle, name, description, logo_url }) {
                         <h4>{name}</h4>
                     </CardTitle>
                     <CardText>About: {description}</CardText>
-                    <CardLink href={`/companies/${handle}`}>Learn More</CardLink>
+                    <CardLink href={`/companies/${handle}`}>Details</CardLink>
                 </CardBody>
             </Card>
         </ListGroupItem>
     )
 }
 
-export default CompanyCard;
+export default JobCompanyCard;

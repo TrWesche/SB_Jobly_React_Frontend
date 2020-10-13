@@ -156,6 +156,15 @@ class apiJobly {
         return res.message;
     }        
 
+    static async applyToJob(jobId, payloadData) {
+        const res = await this.request(`jobs/${jobId}/apply`, payloadData, "post");
+        return res.message;
+    }
+
+    static async retractApplication(jobId) {
+        const res = await this.request(`jobs/${jobId}/retract`, {}, "delete");
+        return res.message;
+    }
 }
 
 export default apiJobly;

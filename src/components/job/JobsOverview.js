@@ -59,11 +59,29 @@ function JobsOverview() {
 
     }  
 
+    const handleJobAction = async (targetJob, state) => {
+        if (state === "applied") {
+            await apiJobly.applyToJob(targetJob.id, {state});
+        }
+
+        if (state === "retracted") {
+            await apiJobly.retractApplication(targetJob.id);
+        }
+        
+        const updatedList = jobList.map((job) => {
+            if (targetJob.id === job.id) {
+                job.state = state;
+            }
+            return job;
+        })
+        setJobList(updatedList)
+    }
+
     const jobRender = () => {
         if (isReady) {
             return (
                 <ListGroup>
-                    {jobList.map(job => JobCard(job))}
+                    {jobList.map(job => JobCard(job, handleJobAction))}
                 </ListGroup>
             )
         } 
